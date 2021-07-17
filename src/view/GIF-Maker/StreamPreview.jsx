@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
+// eslint-disable-next-line react/prop-types
 const StreamPreview = ({ stream }) => {
   const preview = useRef();
 
