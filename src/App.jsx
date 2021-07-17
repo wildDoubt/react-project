@@ -14,6 +14,7 @@ import {
 import React, { useState } from 'react';
 import ScreenRecorder from './Recorder';
 import StreamPreview from './StreamPreview';
+import renderConfig from './renderConfig';
 
 const {
   Header, Content, Footer, Sider,
@@ -64,7 +65,7 @@ function App() {
     pauseRecording,
     resumeRecording,
     status,
-  } = ScreenRecorder({ downloadable: false });
+  } = ScreenRecorder({ downloadable: download });
 
   const renderMediaButton = () => (
     <>
@@ -138,6 +139,7 @@ function App() {
                 <Redirect to={DEFAULT_MENU} />
               </Route>
               <Route path={`/${DEFAULT_MENU}`}>
+                {renderConfig({ download, setDownload })}
                 {StreamPreview({ stream: liveStream })}
                 {renderMediaButton()}
               </Route>
