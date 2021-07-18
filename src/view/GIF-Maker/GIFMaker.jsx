@@ -22,7 +22,7 @@ const GIFMaker = () => {
       {(status === 'Idle' || status === 'Stopped') && <Button onClick={startRecording}>record</Button>}
       {status === 'Recording' && <Button onClick={pauseRecording}>pause</Button>}
       {status === 'Paused' && <Button onClick={resumeRecording}>resume</Button>}
-      {(status === 'Recording' || status === 'Paused') && <Button onClick={stopRecording}>stop</Button>}
+      {(status === 'Recording' || status === 'Paused') && <Button onClick={() => { stopRecording(); }}>stop</Button>}
     </>
   );
   return (
@@ -30,6 +30,16 @@ const GIFMaker = () => {
       {StreamPreview({ stream: liveStream })}
       {config({ download, setDownload })}
       {renderMediaButton()}
+      {status !== 'Stopped'
+        ? (
+          <>
+            {/* 녹화 전 */}
+          </>
+        ) : (
+          <>
+            {/* 녹화 종료 */}
+          </>
+        )}
     </>
   );
 };

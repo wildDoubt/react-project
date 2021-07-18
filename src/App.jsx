@@ -2,10 +2,10 @@ import { Layout } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React, { useState } from 'react';
 import AppFooter from './view/App/AppFooter';
-import AppSider from './view/App/AppSider';
-import { DEFAULT_MENU } from './dummyData/Menu';
 import AppHeader from './view/App/AppHeader';
 import AppContent from './view/App/AppContent';
+
+import { DEFAULT_MENU } from './dummyData/Menu';
 
 const MY_URL = 'https://github.com/wildDoubt';
 
@@ -15,16 +15,16 @@ function App() {
 
   return (
     <Router>
-      <Layout style={{ minHeight: '100vh' }}>
-        <AppSider
+      <Layout className="layout">
+        <AppHeader
           setCurrentMenu={setCurrentMenu}
           setCurrentSubMenu={setCurrentSubMenu}
         />
-        <Layout className="site-layout">
-          <AppHeader />
-          <AppContent currentSubMenu={currentMenu} currentMenu={currentSubMenu} />
-          <AppFooter url={MY_URL} />
-        </Layout>
+        <AppContent
+          currentSubMenu={currentMenu}
+          currentMenu={currentSubMenu}
+        />
+        <AppFooter url={MY_URL} />
       </Layout>
     </Router>
   );
