@@ -19,7 +19,7 @@ const AppHeader = ({ setCurrentMenu, setCurrentSubMenu }) => (
         background: 'rgba(255, 255, 255, 0.3)',
       }}
     />
-    <Menu theme="dark" mode="horizontal" defaultOpenKeys={['2']}>
+    <Menu theme="dark" mode="horizontal">
       {MENU.map((item, index) => {
         const key = index + 1;
         return (
