@@ -5,10 +5,8 @@ import { DEFAULT_MENU } from '../../dummyData/Menu';
 import GIFMaker from '../GIF-Maker/GIFMaker';
 
 const AppContent = () => (
-  <Layout.Content style={{
-    padding: '0 50px',
-    minHeight: '280px',
-  }}
+  <Layout.Content
+    className="layout-content"
   >
     <Switch>
       <Route exact path="/">
