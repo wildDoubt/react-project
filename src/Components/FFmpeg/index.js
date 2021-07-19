@@ -12,7 +12,9 @@ const Converter = () => {
   const loadable = !!window.SharedArrayBuffer;
 
   const load = async () => {
-    await ffmpeg.load();
+    if (!ffmpeg.isLoaded()) {
+      await ffmpeg.load();
+    }
   };
 
   const convertFile = async (url) => {
