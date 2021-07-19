@@ -1,4 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import Downloader from '../Downloader';
 
 const ScreenRecorder = ({ downloadable }) => {
   const mediaRecorder = useRef(null);
@@ -13,16 +14,6 @@ const ScreenRecorder = ({ downloadable }) => {
     mediaChunks.current.push(e.data);
   });
 
-  const downloadMedia = (blobUrl) => {
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.style = 'display: none';
-    a.href = blobUrl;
-
-    a.download = `${Date()}.mp4`;
-    a.click();
-  };
-
   const clearMediaStream = () => {
     if (mediaStream.current) {
       mediaStream.current.getTracks().forEach((track) => track.stop());
@@ -36,12 +27,13 @@ const ScreenRecorder = ({ downloadable }) => {
       {
         type: mediaChunks.current[0].type,
       });
+    console.log(`${(blob.size / 1024).toFixed(3)}KB`);
     const url = URL.createObjectURL(blob);
 
     if (downloadable) {
-      downloadMedia(url);
+      Downloader.download(url);
     }
-
+    console.log(url);
     // window.URL.revokeObjectURL(url);
     setStatus('Stopped');
     setMediaBlobUrl(url);
@@ -51,8 +43,7 @@ const ScreenRecorder = ({ downloadable }) => {
     setStatus('setting...');
 
     try {
-      const stream = await window.navigator.mediaDevices.getDisplayMedia({ video: { mediaSource: 'screen' } });
-      mediaStream.current = stream;
+      mediaStream.current = await window.navigator.mediaDevices.getDisplayMedia({ video: { mediaSource: 'screen' } });
     } catch (e) {
       setError(e.name);
       setStatus('Idle');
@@ -71,7 +62,12 @@ const ScreenRecorder = ({ downloadable }) => {
   };
 
   const startRecording = async () => {
+    clearMediaStream();
     setError('NONE');
+    if (mediaBlobUrl) {
+      window.URL.revokeObjectURL(mediaBlobUrl);
+      setMediaBlobUrl(null);
+    }
     if (!mediaStream.current) {
       await getMediaStream();
     }

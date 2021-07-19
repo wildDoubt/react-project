@@ -3,6 +3,7 @@ import { Button, Col, Row } from 'antd';
 import config from './Config';
 import StreamPreview from './StreamPreview';
 import ScreenRecorder from '../../Components/ScreenRecorder';
+import Converter from '../../Components/FFmpeg';
 
 const GIFMaker = () => {
   const [download, setDownload] = useState(false);
@@ -17,6 +18,10 @@ const GIFMaker = () => {
     status,
   } = ScreenRecorder({ downloadable: download });
 
+  const {
+    convertFile,
+  } = Converter();
+
   const renderMediaButton = () => (
     <>
       {(status === 'Idle' || status === 'Stopped') && <Button onClick={startRecording}>record</Button>}
@@ -25,6 +30,7 @@ const GIFMaker = () => {
       {(status === 'Recording' || status === 'Paused') && <Button onClick={() => { stopRecording(); }}>■</Button>}
     </>
   );
+
   return (
     <>
       <Row justify="center" style={{ padding: '10px 0' }}>
@@ -54,7 +60,13 @@ const GIFMaker = () => {
             </>
           ) : (
             <>
-              {/* 녹화 종료 */}
+              <Button
+                onClick={() => {
+                  convertFile(mediaBlobUrl);
+                }}
+              >
+                변환
+              </Button>
             </>
           )}
       </Row>
