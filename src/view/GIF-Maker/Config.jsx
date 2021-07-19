@@ -8,7 +8,6 @@ const config = ({ setDownload }) => {
 
   return (
     <>
-      <br />
       <Checkbox onChange={onChange}>download</Checkbox>
     </>
   );

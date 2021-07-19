@@ -9,6 +9,7 @@ const GIFMaker = () => {
 
   const {
     liveStream,
+    mediaBlobUrl,
     startRecording,
     stopRecording,
     pauseRecording,
@@ -28,7 +29,11 @@ const GIFMaker = () => {
     <>
       <Row justify="center" style={{ padding: '10px 0' }}>
         <Col span={24} style={{ textAlign: 'center' }}>
-          {StreamPreview({ stream: liveStream })}
+          {StreamPreview({
+            stream: liveStream,
+            streamStatus: status,
+            mediaUrl: mediaBlobUrl,
+          })}
         </Col>
       </Row>
       <Row justify="center">

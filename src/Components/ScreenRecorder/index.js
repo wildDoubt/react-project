@@ -19,7 +19,7 @@ const ScreenRecorder = ({ downloadable }) => {
     a.style = 'display: none';
     a.href = blobUrl;
 
-    a.download = `${Date()}.webm`;
+    a.download = `${Date()}.mp4`;
     a.click();
   };
 
@@ -34,7 +34,7 @@ const ScreenRecorder = ({ downloadable }) => {
     clearMediaStream();
     const blob = new Blob(mediaChunks.current,
       {
-        type: 'video/webm',
+        type: mediaChunks.current[0].type,
       });
     const url = URL.createObjectURL(blob);
 
@@ -42,7 +42,7 @@ const ScreenRecorder = ({ downloadable }) => {
       downloadMedia(url);
     }
 
-    window.URL.revokeObjectURL(url);
+    // window.URL.revokeObjectURL(url);
     setStatus('Stopped');
     setMediaBlobUrl(url);
   };
@@ -62,11 +62,9 @@ const ScreenRecorder = ({ downloadable }) => {
   const stopRecording = () => {
     if (mediaRecorder.current) {
       if (mediaRecorder.current.state !== 'inactive') {
-        setStatus('Stopping');
+        setStatus('Stopped');
         mediaRecorder.current.stop();
-        if (mediaStream.current) {
-          mediaStream.current.getTracks().forEach((track) => track.stop());
-        }
+        clearMediaStream();
         mediaChunks.current = [];
       }
     }
