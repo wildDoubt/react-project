@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import MENU from '../../dummyData/Menu';
+import MENU from '../../Data/Menu';
 
 // eslint-disable-next-line react/prop-types
 const AppSider = ({ setCurrentMenu, setCurrentSubMenu }) => {

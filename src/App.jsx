@@ -5,7 +5,7 @@ import AppFooter from './view/App/AppFooter';
 import AppHeader from './view/App/AppHeader';
 import AppContent from './view/App/AppContent';
 
-import { DEFAULT_MENU } from './dummyData/Menu';
+import { DEFAULT_MENU } from './Data/Menu';
 
 const MY_URL = 'https://github.com/wildDoubt';
 
