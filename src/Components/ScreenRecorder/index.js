@@ -14,6 +14,8 @@ const ScreenRecorder = ({ downloadable }) => {
     mediaChunks.current.push(e.data);
   });
 
+  const downloader = new Downloader();
+
   const clearMediaStream = () => {
     if (mediaStream.current) {
       mediaStream.current.getTracks().forEach((track) => track.stop());
@@ -31,9 +33,8 @@ const ScreenRecorder = ({ downloadable }) => {
     const url = URL.createObjectURL(blob);
 
     if (downloadable) {
-      Downloader.download(url);
+      downloader.download(url);
     }
-    console.log(url);
     // window.URL.revokeObjectURL(url);
     setStatus('Stopped');
     setMediaBlobUrl(url);

@@ -5,17 +5,15 @@ export default class Downloader {
     if (Downloader.instance) {
       return Downloader.instance;
     }
-
+    this.aElement = document.createElement('a');
+    document.body.appendChild(this.aElement);
+    this.aElement.style = 'display: none';
     Downloader.instance = this;
   }
 
-  static download(url, fileExtension = 'mp4') {
-    this.a = document.createElement('a');
-    document.body.appendChild(this.a);
-    this.a.style = 'display: none';
-    this.a.href = url;
-
-    this.a.download = `${Date()}.${fileExtension}`;
-    this.a.click();
+  download(url, fileExtension = 'mp4') {
+    this.aElement.href = url;
+    this.aElement.download = `${Date()}.${fileExtension}`;
+    this.aElement.click();
   }
 }

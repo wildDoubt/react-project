@@ -10,6 +10,7 @@ const ffmpeg = createFFmpeg({
 
 const Converter = () => {
   const loadable = !!window.SharedArrayBuffer;
+  const downloader = new Downloader();
 
   const load = async () => {
     if (!ffmpeg.isLoaded()) {
@@ -37,7 +38,7 @@ const Converter = () => {
         const gifUrl = URL.createObjectURL(
           new Blob([data.buffer], { type: 'image/gif' }),
         );
-        Downloader.download(gifUrl, 'gif');
+        downloader.download(gifUrl, 'gif');
       })
         .catch((e) => Error(e));
     }
