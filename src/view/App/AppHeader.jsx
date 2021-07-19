@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import MENU from '../../dummyData/Menu';
-import logo from '../../new_logo.png';
+import logo from '../../logo.png';
 
 // eslint-disable-next-line react/prop-types
 const AppHeader = ({ setCurrentMenu, setCurrentSubMenu }) => (
