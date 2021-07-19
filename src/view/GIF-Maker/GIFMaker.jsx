@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, Col, Row } from 'antd';
 import config from './Config';
 import StreamPreview from './StreamPreview';
-import ScreenRecorder from '../../Components/ScreenRecorder';
-import Converter from '../../Components/FFmpeg';
+import ScreenRecorder from '../../Plugins/ScreenRecorder';
+import Converter from '../../Plugins/FFmpeg';
 
 const GIFMaker = () => {
   const [download, setDownload] = useState(false);
