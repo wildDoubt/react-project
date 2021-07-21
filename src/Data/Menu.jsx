@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined,
 } from '@ant-design/icons';

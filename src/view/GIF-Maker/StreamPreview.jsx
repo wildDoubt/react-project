@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // eslint-disable-next-line react/prop-types
 const StreamPreview = ({ stream, streamStatus, mediaUrl }) => {

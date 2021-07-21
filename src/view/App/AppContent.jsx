@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout } from 'antd';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { DEFAULT_MENU } from '../../Data/Menu';

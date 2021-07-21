@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Col, Row } from 'antd';
 import config from './Config';
 import StreamPreview from './StreamPreview';

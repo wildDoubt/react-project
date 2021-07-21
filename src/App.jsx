@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AppFooter from './view/App/AppFooter';
 import AppHeader from './view/App/AppHeader';
 import AppContent from './view/App/AppContent';

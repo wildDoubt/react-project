@@ -1,4 +1,3 @@
-import React from 'react';
 import AppStatus from '../AppStatus';
 
 const ContentNotFound = () => (
