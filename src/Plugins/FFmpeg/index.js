@@ -45,7 +45,9 @@ const Converter = () => {
   };
 
   useEffect(() => {
-    load();
+    if (loadable) {
+      load();
+    }
   }, []);
 
   return {

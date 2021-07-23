@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
-import Downloader from '../Downloader';
 
-const ScreenRecorder = ({ downloadable }) => {
+const ScreenRecorder = () => {
   const mediaRecorder = useRef(null);
   const mediaChunks = useRef([]);
   const mediaStream = useRef(null);
@@ -13,8 +12,6 @@ const ScreenRecorder = ({ downloadable }) => {
   const onRecordingActive = ((e) => {
     mediaChunks.current.push(e.data);
   });
-
-  const downloader = new Downloader();
 
   const clearMediaStream = () => {
     if (mediaStream.current) {
@@ -32,9 +29,6 @@ const ScreenRecorder = ({ downloadable }) => {
     console.log(`${(blob.size / 1024).toFixed(3)}KB`);
     const url = URL.createObjectURL(blob);
 
-    if (downloadable) {
-      downloader.download(url);
-    }
     // window.URL.revokeObjectURL(url);
     setStatus('Stopped');
     setMediaBlobUrl(url);

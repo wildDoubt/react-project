@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import { Button, Col, Row } from 'antd';
-import config from './Config';
 import StreamPreview from './StreamPreview';
 import ScreenRecorder from '../../Plugins/ScreenRecorder';
 import Converter from '../../Plugins/FFmpeg';
+import Downloader from '../../Plugins/Downloader';
 
 const GIFMaker = () => {
-  const [download, setDownload] = useState(false);
-
   const {
     liveStream,
     mediaBlobUrl,
@@ -16,15 +13,18 @@ const GIFMaker = () => {
     pauseRecording,
     resumeRecording,
     status,
-  } = ScreenRecorder({ downloadable: download });
+  } = ScreenRecorder();
+
+  const downloader = new Downloader();
 
   const {
+    loadable,
     convertFile,
   } = Converter();
 
   const renderMediaButton = () => (
     <>
-      {(status === 'Idle' || status === 'Stopped') && <Button onClick={startRecording}>record</Button>}
+      {(status === 'Idle' || status === 'Stopped') && <Button type="primary" onClick={startRecording}>record</Button>}
       {status === 'Recording' && <Button onClick={pauseRecording}>❚❚</Button>}
       {status === 'Paused' && <Button onClick={resumeRecording}>▶</Button>}
       {(status === 'Recording' || status === 'Paused') && <Button onClick={() => { stopRecording(); }}>■</Button>}
@@ -43,16 +43,14 @@ const GIFMaker = () => {
         </Col>
       </Row>
       <Row justify="center">
-        {config({ download, setDownload })}
-      </Row>
-      <Row justify="center">
         {status === 'Paused'
           ? <p>녹화가 되고 있지 않아요!</p>
           : null}
       </Row>
-
-      <Row justify="center" style={{ margin: '10px 0' }}>
+      <Row justify="center">
         {renderMediaButton()}
+      </Row>
+      <Row justify="center" style={{ margin: '10px 0' }}>
         {status !== 'Stopped'
           ? (
             <>
@@ -62,10 +60,19 @@ const GIFMaker = () => {
             <>
               <Button
                 onClick={() => {
+                  downloader.download(mediaBlobUrl);
+                }}
+                disable={() => loadable}
+              >
+                MP4
+              </Button>
+              <Button
+                onClick={() => {
                   convertFile(mediaBlobUrl);
                 }}
+                disable={() => loadable}
               >
-                변환
+                GIF
               </Button>
             </>
           )}
