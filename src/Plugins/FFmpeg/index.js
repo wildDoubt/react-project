@@ -10,6 +10,7 @@ const ffmpeg = createFFmpeg({
 
 const Converter = () => {
   const loadable = !!window.SharedArrayBuffer;
+
   const downloader = new Downloader();
 
   const load = async () => {
@@ -21,7 +22,7 @@ const Converter = () => {
   const convertFile = async (url) => {
     if (url !== undefined) {
       ffmpeg.FS('writeFile', 'input.mp4', await fetchFile(url));
-      ffmpeg.run(
+      await ffmpeg.run(
         '-i',
         'input.mp4',
         '-vf',
@@ -33,14 +34,14 @@ const Converter = () => {
         'output.gif',
         '-pix_fmt',
         'rgb24',
-      ).then(() => {
-        const data = ffmpeg.FS('readFile', 'output.gif');
-        const gifUrl = URL.createObjectURL(
-          new Blob([data.buffer], { type: 'image/gif' }),
-        );
-        downloader.download(gifUrl, 'gif');
-      })
-        .catch((e) => Error(e));
+      );
+
+      const data = ffmpeg.FS('readFile', 'output.gif');
+
+      const gifUrl = URL.createObjectURL(
+        new Blob([data.buffer], { type: 'image/gif' }),
+      );
+      downloader.download(gifUrl, 'gif');
     }
   };
 

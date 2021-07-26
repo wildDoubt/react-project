@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, Col, Row } from 'antd';
 import StreamPreview from './StreamPreview';
 import ScreenRecorder from '../../Plugins/ScreenRecorder';
@@ -16,6 +17,7 @@ const GIFMaker = () => {
   } = ScreenRecorder();
 
   const downloader = new Downloader();
+  const [loading, setLoading] = useState(false);
 
   const {
     loadable,
@@ -68,9 +70,14 @@ const GIFMaker = () => {
               </Button>
               <Button
                 onClick={() => {
-                  convertFile(mediaBlobUrl);
+                  setLoading(true);
+                  convertFile(mediaBlobUrl)
+                    .then(() => {
+                      setLoading(false);
+                    });
                 }}
                 disabled={!loadable}
+                loading={loading}
               >
                 GIF
               </Button>
