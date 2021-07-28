@@ -6,18 +6,20 @@ import logo from '../../logo.png';
 // eslint-disable-next-line react/prop-types
 const AppHeader = ({ setCurrentMenu, setCurrentSubMenu }) => (
   <Layout.Header>
-    <img
-      className="logo"
-      alt="{my_logo}"
-      src={logo}
-      style={{
-        float: 'left',
-        width: '120px',
-        height: '31px',
-        margin: '16px 24px 16px 0',
-        background: 'rgba(255, 255, 255, 0.3)',
-      }}
-    />
+    <a href="/">
+      <img
+        className="logo"
+        alt="{my_logo}"
+        src={logo}
+        style={{
+          float: 'left',
+          width: '120px',
+          height: '31px',
+          margin: '16px 24px 16px 0',
+          background: 'rgba(255, 255, 255, 0.3)',
+        }}
+      />
+    </a>
     <Menu theme="dark" mode="horizontal">
       {MENU.map((item, index) => {
         const key = index + 1;
