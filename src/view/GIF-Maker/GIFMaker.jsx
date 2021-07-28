@@ -64,7 +64,6 @@ const GIFMaker = () => {
                 onClick={() => {
                   downloader.download(mediaBlobUrl);
                 }}
-                disabled={!loadable}
               >
                 MP4
               </Button>
